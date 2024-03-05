@@ -165,7 +165,31 @@ public void agregarPerro() throws NombreDuplicadoException{
      }
   
 }
-    
+
+    public void mostrarPerrosPorRaza() {
+        
+        if (misPerros.isEmpty()) {
+            System.out.println("No se han ingresado perros al sistema.");
+            return;
+        }
+        
+        // Ordenar perros por raza
+        Comparator<Perro> comparadorRaza = new Comparator<Perro>() {
+            @Override
+            public int compare(Perro p1, Perro p2) {
+                return p1.getRaza().compareTo(p2.getRaza());
+            }
+        }; 
+        Collections.sort(misPerros, comparadorRaza);
+        for(Perro p: misPerros) {
+            System.out.println("Nombre: "+p.getNombre());
+            System.out.println("Foto: "+p.getFoto());
+            System.out.println("Raza: "+p.getRaza());
+            System.out.println("Edad: "+p.getEdad());
+            System.out.println("Puntos: "+p.getPuntos());
+            System.out.println("----------------------------------");
+        }      
+    }    
     public void menuListar(){
             boolean activo = true;
     do{
@@ -189,8 +213,11 @@ public void agregarPerro() throws NombreDuplicadoException{
                   case 3 :
                       mostrarMenu();
                       break;
+                              case 4 :
+                     mostrarPerrosPorRaza();
+                      break;
 
-                      case 4:
+                      case 5:
                        activo = false;
                     System.out.println("programa finalizado");
                     break;
